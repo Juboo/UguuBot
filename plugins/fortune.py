@@ -1,4 +1,5 @@
 from util import hook
+import subprocess
 import random
 
 with open("plugins/data/fortunes.txt") as f:
@@ -9,4 +10,6 @@ with open("plugins/data/fortunes.txt") as f:
 @hook.command(autohelp=False)
 def fortune(inp):
     "fortune -- Fortune cookies on demand."
-    return random.choice(fortunes)
+    fortune = subprocess.Popen("fortune", stderr=subprocess.STDOUT, stdout=subprocess.PIPE).communicate()[0]
+#    return random.choice(fortunes)
+    return fortune
